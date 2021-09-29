@@ -1,11 +1,14 @@
-export interface Todo {
+export interface TodoItem {
   id:  string;
-  description:  string;
-  isDone: boolean;
+  title:  string;
+  completed: boolean;
 }
 
-export function createTodo(params: Partial<Todo>) {
-  return {
+export function createTodo(title: string) {
 
-  } as Todo;
+  return {
+    id: "",
+    title,
+    completed: false
+  } as TodoItem;
 }

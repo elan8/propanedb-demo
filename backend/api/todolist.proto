@@ -1,6 +1,5 @@
 syntax = "proto3";
 import "google/api/annotations.proto";
-// import "google/protobuf/timestamp.proto";
 
 option go_package = "pb/";
 
@@ -14,8 +13,8 @@ message Result{
 
 message TodoItem{
     string id = 1;
-    string description = 2;
-    bool isDone =3 ;
+    string title = 2;
+    bool completed =3 ;
   }
 
   message TodoItems{

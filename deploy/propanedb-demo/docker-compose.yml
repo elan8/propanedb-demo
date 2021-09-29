@@ -12,7 +12,7 @@ services:
 
   db:
     container_name: db
-    image: jevon82/propanedb
+    image: ghcr.io/elan8/propanedb:latest
 
   todo-service:
     container_name: todo-service

@@ -37,7 +37,10 @@ func Init() {
 	}
 
 	fds := &descriptorpb.FileDescriptorSet{}
-	proto.Unmarshal(b, fds)
+	err = proto.Unmarshal(b, fds)
+	if err != nil {
+		log.Fatalf("Error: %s", err)
+	}
 
 	util.WaitForGrpc()
 

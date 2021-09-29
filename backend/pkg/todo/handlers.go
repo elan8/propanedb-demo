@@ -6,6 +6,7 @@ import (
 	"github.com/elan8/propanedb-demo/pkg/pb"
 	"github.com/elan8/propanedb-go-driver/propane"
 	log "github.com/sirupsen/logrus"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 func (s server) Get(ctx context.Context, in *pb.TodoId) (*pb.TodoItem, error) {
@@ -38,6 +39,13 @@ func (s server) GetAll(ctx context.Context, in *pb.Empty) (*pb.TodoItems, error)
 
 func (s server) Create(ctx context.Context, in *pb.TodoItem) (*pb.TodoItem, error) {
 	propaneEntity := &propane.PropaneEntity{}
+
+	any, err := anypb.New(in)
+	if err != nil {
+		log.Fatalf("Error: %s", err)
+	}
+	propaneEntity.Data = any
+
 	id, err := s.client.Put(ctx, propaneEntity)
 	in.Id = id.GetId()
 	return in, err
