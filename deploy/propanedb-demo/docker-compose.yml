@@ -1,0 +1,20 @@
+
+services:    
+  # frontend:
+  #   container_name: frontend
+  #   image: propanedb-demo/frontend:latest 
+
+  grpc-gateway:
+    container_name: grpc-gateway
+    image: propanedb-demo/grpc-gateway:latest 
+    ports:
+      - "8080:8080"
+
+  db:
+    container_name: db
+    image: jevon82/propanedb
+
+  todo-service:
+    container_name: todo-service
+    image: propanedb-demo/todo-service:latest 
+ 
