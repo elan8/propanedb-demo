@@ -1,0 +1,62 @@
+syntax = "proto3";
+import "google/api/annotations.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "pb/";
+
+package todo;
+
+message Empty{}
+
+message Result{
+  bool ok = 1;
+}
+
+message TodoItem{
+    string id = 1;
+    string description = 2;
+    bool isDone =3 ;
+  }
+
+  message TodoItems{
+    repeated TodoItem items = 1;
+  }
+
+  message TodoId{
+    string id = 1;
+  }
+
+  message TodoSearch{
+    string description = 1;
+  }
+
+  service TodoList {
+    rpc Get (TodoId) returns (TodoItem) {
+      option (google.api.http) = {
+        get : "/v1/todo/{id}"
+      };
+    }
+    rpc GetAll (Empty) returns (TodoItems) {
+      option (google.api.http) = {
+        get : "/v1/todo"
+      };
+    }
+    rpc Create(TodoItem) returns (TodoItem) {
+      option (google.api.http) = {
+        post : "/v1/todo/create"
+        body : "*"
+      };
+    }
+    rpc Delete (TodoId) returns (Result) {
+      option (google.api.http) = {
+        delete : "/v1/todo/{id}"
+      };
+    }
+    rpc Search (TodoSearch) returns (TodoItems) {
+      option (google.api.http) = {
+        post : "/v1/todo/search"
+        body : "*"
+      };
+    }
+  }
+
