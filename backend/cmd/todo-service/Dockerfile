@@ -8,7 +8,7 @@ COPY ./cmd/todo-service/main.go cmd/todo-service/main.go
 COPY ./pkg/todo pkg/todo
 COPY ./pkg/pb pkg/pb
 COPY ./pkg/util pkg/util
-COPY ./descriptor/todolist.bin /app
+COPY ./descriptor/messages.bin /app
 RUN ls /app/
 
 WORKDIR /app/cmd/todo-service

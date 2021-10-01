@@ -1,33 +1,11 @@
 syntax = "proto3";
 import "google/api/annotations.proto";
+import "api/messages.proto";
 
 option go_package = "pb/";
 
 package todo;
 
-message Empty{}
-
-message Result{
-  bool ok = 1;
-}
-
-message TodoItem{
-    string id = 1;
-    string title = 2;
-    bool completed =3 ;
-  }
-
-  message TodoItems{
-    repeated TodoItem items = 1;
-  }
-
-  message TodoId{
-    string id = 1;
-  }
-
-  message TodoSearch{
-    string description = 1;
-  }
 
   service TodoList {
     rpc Get (TodoId) returns (TodoItem) {

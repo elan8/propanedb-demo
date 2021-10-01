@@ -1,8 +1,15 @@
 cd ..
 
-# generate Protobuf and GRPC files
+# generate descriptor
 docker run --rm -v $(pwd):$(pwd) -w $(pwd) jevon82/golang-builder-alpine \
-/bin/sh -c "protoc  --go_out=:./pkg --go-grpc_out=:./pkg  --descriptor_set_out=./descriptor/todolist.bin -I. -I/app/  ./api/todolist.proto"
+/bin/sh -c "protoc --descriptor_set_out=./descriptor/messages.bin -I. -I/app/  ./api/messages.proto"
+
+# generate code
+docker run --rm -v $(pwd):$(pwd) -w $(pwd) jevon82/golang-builder-alpine \
+/bin/sh -c "protoc  --go_out=:./pkg --go-grpc_out=:./pkg -I. -I/app/  ./api/todolist.proto"
+
+docker run --rm -v $(pwd):$(pwd) -w $(pwd) jevon82/golang-builder-alpine \
+/bin/sh -c "protoc  --go_out=:./pkg --go-grpc_out=:./pkg -I. -I/app/  ./api/messages.proto"
 
 # generate GRPC Gateway code
 docker run --rm -v $(pwd):$(pwd) -w $(pwd) jevon82/golang-builder-alpine \

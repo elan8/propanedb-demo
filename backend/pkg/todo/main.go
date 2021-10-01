@@ -31,7 +31,7 @@ func Init() {
 	serverAddress := "db:50051"
 	databaseName := "todo"
 
-	b, err := ioutil.ReadFile("/app/todolist.bin")
+	b, err := ioutil.ReadFile("/app/messages.bin")
 	if err != nil {
 		log.Fatalf("Error: %s", err)
 	}
