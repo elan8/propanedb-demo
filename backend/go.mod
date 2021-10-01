@@ -3,9 +3,7 @@ module github.com/elan8/propanedb-demo
 go 1.16
 
 require (
-	github.com/elan8/propanedb-go-driver v0.0.0-20210907165531-b649a96c58ab
-	//github.com/elan8/propanedb-go-driver v0.0.1
-	//github.com/elan8/propanedb-go-driver v0.0.0-20210907165531-b649a96c58ab
+	github.com/elan8/propanedb-go-driver v0.0.2
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/golang/glog v1.0.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0

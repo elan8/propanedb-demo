@@ -34,6 +34,23 @@ func (s server) GetAll(ctx context.Context, in *pb.Empty) (*pb.TodoItems, error)
 	//entity := s.client.Search()
 
 	output := &pb.TodoItems{}
+
+	searchQuery := propane.PropaneSearch{}
+	searchQuery.EntityType = "TodoItem"
+	searchQuery.Query = "*"
+	entities, err := s.client.Search(ctx, &searchQuery)
+	if err != nil {
+		log.Fatalf("Error: %s", err)
+	}
+
+	for _, entity := range entities.Entities {
+		item := &pb.TodoItem{}
+		if err := entity.Data.UnmarshalTo(item); err != nil {
+			log.Fatalf("Error: %s", err)
+		}
+		output.Items = append(output.Items, item)
+	}
+
 	return output, nil
 }
 

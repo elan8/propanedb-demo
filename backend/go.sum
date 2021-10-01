@@ -61,8 +61,8 @@ github.com/coreos/go-systemd/v22 v22.3.2/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSV
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/elan8/propanedb-go-driver v0.0.0-20210907165531-b649a96c58ab h1:CJKZjjY6vAYoyw9rrqQRDmZ1N2hZPiV1BWGLvPjdBHw=
-github.com/elan8/propanedb-go-driver v0.0.0-20210907165531-b649a96c58ab/go.mod h1:NBVonNhBe3fFLuH6Ft/p5nkCK3PtnyBbWyBGC9XGqDc=
+github.com/elan8/propanedb-go-driver v0.0.2 h1:jXfe32La6dqlECrMjKjgFAQyn8qEWir4CNLpO6UgT5Y=
+github.com/elan8/propanedb-go-driver v0.0.2/go.mod h1:NBVonNhBe3fFLuH6Ft/p5nkCK3PtnyBbWyBGC9XGqDc=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=

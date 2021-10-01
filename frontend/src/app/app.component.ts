@@ -18,13 +18,21 @@ export class AppComponent {
 
     todoService.add(todo1).subscribe( data => {
       console.log("Add: Data="+ JSON.stringify(data) )
-     this.todos= data
+     //this.todos= data
     })
 
-   todoService.get().subscribe( data => {
-     console.log("Get: Data="+ JSON.stringify(data) )
-    this.todos= data
-   })
+
+    var todo2=createTodo("Todo 2");
+
+    todoService.add(todo2).subscribe( data => {
+      console.log("Add: Data="+ JSON.stringify(data) )
+     //this.todos= data
+    })
+  
+  //  todoService.get().subscribe( data => {
+  //    console.log("Get: Data="+ JSON.stringify(data) )
+  //   this.todos= data
+  //  })
 
   }
 }
