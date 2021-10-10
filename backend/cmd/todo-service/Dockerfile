@@ -9,7 +9,7 @@ COPY ./pkg/todo pkg/todo
 COPY ./pkg/pb pkg/pb
 COPY ./pkg/util pkg/util
 COPY ./descriptor/messages.bin /app
-RUN ls /app/
+# RUN ls /app/
 
 WORKDIR /app/cmd/todo-service
 RUN CGO_ENABLED=0 GOOS=linux go build -o /app/main main.go

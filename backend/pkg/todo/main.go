@@ -13,6 +13,8 @@ import (
 	"google.golang.org/protobuf/types/descriptorpb"
 )
 
+var databaseName string
+
 type server struct {
 	pb.UnimplementedTodoListServer
 	config util.Config
@@ -29,7 +31,7 @@ func Init() {
 
 	ctx := context.Background()
 	serverAddress := "db:50051"
-	databaseName := "todo"
+	databaseName = "todo"
 
 	b, err := ioutil.ReadFile("/app/messages.bin")
 	if err != nil {
@@ -44,7 +46,12 @@ func Init() {
 
 	util.WaitForGrpc()
 
-	client, err := propane.Connect(ctx, serverAddress, databaseName, fds)
+	client, err := propane.Connect(ctx, serverAddress)
+	if err != nil {
+		log.Fatalf("Error: %s", err)
+	}
+
+	_, err = client.CreateDatabase(ctx, &propane.PropaneDatabase{DatabaseName: databaseName, DescriptorSet: fds})
 	if err != nil {
 		log.Fatalf("Error: %s", err)
 	}

@@ -29,10 +29,10 @@ export class AppComponent {
      //this.todos= data
     })
   
-  //  todoService.get().subscribe( data => {
-  //    console.log("Get: Data="+ JSON.stringify(data) )
-  //   this.todos= data
-  //  })
+   todoService.get().subscribe( data => {
+     console.log("Get: Data="+ JSON.stringify(data) )
+    //this.todos= data
+   })
 
   }
 }

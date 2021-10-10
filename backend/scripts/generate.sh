@@ -1,4 +1,4 @@
-cd ..
+#cd ..
 
 # generate descriptor
 docker run --rm -v $(pwd):$(pwd) -w $(pwd) jevon82/golang-builder-alpine \
