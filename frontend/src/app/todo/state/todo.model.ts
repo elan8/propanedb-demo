@@ -4,6 +4,11 @@ export interface TodoItem {
   completed: boolean;
 }
 
+export interface TodoItems {
+  items: TodoItem[];
+
+}
+
 export function createTodo(title: string) {
 
   return {

@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 import { TodoItem } from './todo.model';
 
-export interface TodoState extends EntityState<TodoItem> {}
+export interface TodoState extends EntityState<TodoItem> {
+  todos: TodoItem[]
+}
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'todo' })
