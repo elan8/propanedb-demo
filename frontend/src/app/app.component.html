@@ -319,5 +319,9 @@
 
 </div>
 
+<mat-list role="list">
+  <app-todo-item *ngFor="let todo of todos" [todo]="todo" (completeChange)="onCompleteChange(todo, $event)"></app-todo-item>
+</mat-list>
+
 
 <router-outlet></router-outlet>

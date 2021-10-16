@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { HashMap } from '@datorama/akita';
 import { createTodo, TodoItem } from './todo/state/todo.model';
 import { TodoQuery } from './todo/state/todo.query';
@@ -12,28 +13,20 @@ import { TodoService } from './todo/state/todo.service';
 export class AppComponent {
   title = 'frontend';
   todos: TodoItem[] = [];
-  //todos: HashMap<TodoItem> | undefined ;
-  //todo1 =null;
+
+  // @Input()
+  // todos: TodoItem[] = [];
+
+  @Output() todoChange = new EventEmitter<TodoItem>();
 
   constructor(private todoService: TodoService , private todoQuery : TodoQuery) {
 
     this.todoQuery.select(state => state.todos).subscribe(
       todos => {
         this.todos = todos;
-        //console.log("Todos="+todos);
-        // this.maxNumberOfServices = user.accountTypeDefinition.numberOfServices;
-        // this.maxNumberOfRPC = user.accountTypeDefinition.numberOfRPC;
-        // this.persistenceAvailable=user.accountTypeDefinition.persistence;
-        // this.freeAccount = user.accountType=="FREE";
-        //this.numberOfProjects= this.CountNumberOfProjects(projects);
-        // console.log("Get token:"+ value);
-        //this.httpHeaders = new HttpHeaders().set('Authorization', this.token);
       }
     )
-
-
     var todo1=createTodo("Todo 1");
-
     todoService.add(todo1).subscribe( data => {
       console.log("Add: Data="+ JSON.stringify(data) )
      //this.todos= data
@@ -53,5 +46,14 @@ export class AppComponent {
    })
 
   }
+
+
+  onCompleteChange(todo: TodoItem, change: MatCheckboxChange) {
+    this.todoChange.emit({
+      ...todo,
+      completed: change.checked
+    });
+  }
+
 }
 
