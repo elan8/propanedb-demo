@@ -1,58 +1,77 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { HashMap } from '@datorama/akita';
-import { createTodo, TodoItem } from './todo/state/todo.model';
-import { TodoQuery } from './todo/state/todo.query';
-import { TodoService } from './todo/state/todo.service';
+import { createTodo, TodoItem, TodoItems } from './todo-state/todo.model';
+import { TodoQuery } from './todo-state/todo.query';
+import { TodoService } from './todo-state/todo.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  //title = 'frontend';
   todos: TodoItem[] = [];
+  title: string = "";
+  _todoService: TodoService;
 
-  // @Input()
-  // todos: TodoItem[] = [];
 
   @Output() todoChange = new EventEmitter<TodoItem>();
 
-  constructor(private todoService: TodoService , private todoQuery : TodoQuery) {
+  constructor(private todoService: TodoService, private todoQuery: TodoQuery) {
 
+    this._todoService = todoService;
     this.todoQuery.select(state => state.todos).subscribe(
       todos => {
         this.todos = todos;
       }
     )
-    var todo1=createTodo("Todo 1");
-    todoService.add(todo1).subscribe( data => {
-      console.log("Add: Data="+ JSON.stringify(data) )
-     //this.todos= data
+
+    //update todos
+    this.todoService.getAll().subscribe(response => {
+      console.log("Get: Data=" + JSON.stringify(response))
+      //this.todos= data
+      let todoItems = response?.body as TodoItems;
+      let todos = todoItems.items;
+
     })
 
 
-    // var todo2=createTodo("Todo 2");
+  }
 
-    // todoService.add(todo2).subscribe( data => {
-    //   console.log("Add: Data="+ JSON.stringify(data) )
-    //  //this.todos= data
-    // })
-  
-   todoService.getAll().subscribe( data => {
-     //console.log("Get: Data="+ JSON.stringify(data) )
-     //this.todos= data
-   })
+  addToDo() {
+    // this.store.dispatch(new AddToDo({
+    //   id: Math.random(),
+    //   complete: false,
+    //   task: this._toDo.task
+    // }));
+
+    var todo1 = createTodo(this.title);
+    this._todoService.add(todo1).subscribe(data => {
+      console.log("Add: Data=" + JSON.stringify(data))
+    })
+
+    //update todos
+    this.todoService.getAll().subscribe(response => {
+      console.log("Get: Data=" + JSON.stringify(response))
+      //this.todos= data
+      let todoItems = response?.body as TodoItems;
+      let todos = todoItems.items;
+
+    })
 
   }
 
+  onAddToDoChange(title: string) {
+    this.title = title;
+  }
 
   onCompleteChange(todo: TodoItem, change: MatCheckboxChange) {
-    this.todoChange.emit({
-      ...todo,
-      completed: change.checked
-    });
+    // this.todoChange.emit({
+    //   ...todo,
+    //   completed: change.checked
+    // });
   }
 
 }
