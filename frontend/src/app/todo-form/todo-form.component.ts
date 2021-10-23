@@ -10,23 +10,47 @@ import { TodoItem } from '../todo-state/todo.model';
   styleUrls: ['./todo-form.component.scss']
 })
 export class TodoFormComponent implements OnInit {
-  @Output() toDoChange = new EventEmitter<string>();
+  @Output() addTodoEmitter = new EventEmitter<string>();
 
   title: FormControl = new FormControl;
 
-  private unsubscribe = new Subject<void>();
+  //private unsubscribe = new Subject<void>();
 
   constructor() { }
 
   ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    //this.unsubscribe.next();
+    //this.unsubscribe.complete();
   }
 
   ngOnInit() {
     this.title = new FormControl();
-    this.title.valueChanges
-      .pipe(debounceTime(200), takeUntil(this.unsubscribe))
-      .subscribe(value => this.toDoChange.emit( value ));
+    // this.title.valueChanges
+    //   .pipe(debounceTime(200), takeUntil(this.unsubscribe))
+    //   .subscribe(value => this.toDoChange.emit( value ));
   }
+  addTodo() {
+    this.addTodoEmitter.emit(this.title.value);
+    // this.store.dispatch(new AddToDo({
+    //   id: Math.random(),
+    //   complete: false,
+    //   task: this._toDo.task
+    // }));
+
+    // var todo1 = createTodo(this.title);
+    // this._todoService.add(todo1).subscribe(data => {
+    //   console.log("Add: Data=" + JSON.stringify(data))
+    // })
+
+    // //update todos
+    // this.todoService.getAll().subscribe(response => {
+    //   console.log("Get: Data=" + JSON.stringify(response))
+    //   //this.todos= data
+    //   let todoItems = response?.body as TodoItems;
+    //   let todos = todoItems.items;
+
+    // })
+
+  }
+
 }

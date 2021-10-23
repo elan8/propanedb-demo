@@ -40,14 +40,14 @@ export class AppComponent {
 
   }
 
-  addToDo() {
+  addTodo(title: string) { 
     // this.store.dispatch(new AddToDo({
     //   id: Math.random(),
     //   complete: false,
     //   task: this._toDo.task
     // }));
 
-    var todo1 = createTodo(this.title);
+    var todo1 = createTodo(title);
     this._todoService.add(todo1).subscribe(data => {
       console.log("Add: Data=" + JSON.stringify(data))
     })
@@ -63,9 +63,9 @@ export class AppComponent {
 
   }
 
-  onAddToDoChange(title: string) {
-    this.title = title;
-  }
+  // onAddToDoChange(title: string) {
+  //   this.title = title;
+  // }
 
   onCompleteChange(todo: TodoItem, change: MatCheckboxChange) {
     // this.todoChange.emit({

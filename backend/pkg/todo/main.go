@@ -51,7 +51,12 @@ func Init() {
 		log.Fatalf("Error: %s", err)
 	}
 
-	_, err = client.CreateDatabase(ctx, &propane.PropaneDatabase{DatabaseName: databaseName, DescriptorSet: fds})
+	err = client.CreateDatabase(ctx, databaseName, fds)
+	if err != nil {
+		log.Printf("Error: %s", err)
+	}
+
+	err = client.SelectDatabase(ctx, databaseName)
 	if err != nil {
 		log.Fatalf("Error: %s", err)
 	}
