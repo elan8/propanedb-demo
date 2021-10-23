@@ -31,6 +31,7 @@ export class TodoFormComponent implements OnInit {
   }
   addTodo() {
     this.addTodoEmitter.emit(this.title.value);
+    this.title.reset();
     // this.store.dispatch(new AddToDo({
     //   id: Math.random(),
     //   complete: false,

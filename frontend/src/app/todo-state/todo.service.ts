@@ -44,9 +44,6 @@ export class TodoService {
   }
 
   add(todo: TodoItem) {
-    //this.todoStore.add(todo);
-
-
 
     return this.http.post<TodoItem[]>('http://localhost:8080/v1/todo/create', todo).pipe(tap(entities => {
       //this.todoStore.set(entities);
@@ -54,12 +51,20 @@ export class TodoService {
 
   }
 
-  update(id: ID, todo: Partial<TodoItem>) {
-    this.todoStore.update(id, todo);
+  update(todo: Partial<TodoItem>) {
+    return this.http.post<TodoItem[]>('http://localhost:8080/v1/todo/update', todo).pipe(tap(entities => {
+      //this.todoStore.set(entities);
+    }));
+    //this.todoStore.update(id, todo);
   }
 
   remove(id: ID) {
-    this.todoStore.remove(id);
+
+    return this.http.delete<TodoItem>('http://localhost:8080/v1/todo/delete/'+id).pipe(tap(entities => {
+      //this.todoStore.set(entities);
+    }));
+
+    //this.todoStore.remove(id);
   }
 
 }

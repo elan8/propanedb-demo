@@ -28,6 +28,12 @@ export class AppComponent {
       }
     )
 
+    this.getTodos();
+
+
+  }
+
+  getTodos() {
     //update todos
     this.todoService.getAll().subscribe(response => {
       console.log("Get: Data=" + JSON.stringify(response))
@@ -36,11 +42,11 @@ export class AppComponent {
       let todos = todoItems.items;
 
     })
-
-
   }
 
-  addTodo(title: string) { 
+
+
+  addTodo(title: string) {
     // this.store.dispatch(new AddToDo({
     //   id: Math.random(),
     //   complete: false,
@@ -52,14 +58,15 @@ export class AppComponent {
       console.log("Add: Data=" + JSON.stringify(data))
     })
 
-    //update todos
-    this.todoService.getAll().subscribe(response => {
-      console.log("Get: Data=" + JSON.stringify(response))
-      //this.todos= data
-      let todoItems = response?.body as TodoItems;
-      let todos = todoItems.items;
+    this.getTodos();
+    // //update todos
+    // this.todoService.getAll().subscribe(response => {
+    //   console.log("Get: Data=" + JSON.stringify(response))
+    //   //this.todos= data
+    //   let todoItems = response?.body as TodoItems;
+    //   let todos = todoItems.items;
 
-    })
+    // })
 
   }
 
@@ -68,6 +75,11 @@ export class AppComponent {
   // }
 
   onCompleteChange(todo: TodoItem, change: MatCheckboxChange) {
+
+    this._todoService.update(todo).subscribe(data => {
+      console.log("Update todo: " + JSON.stringify(data))
+    })
+
     // this.todoChange.emit({
     //   ...todo,
     //   completed: change.checked
